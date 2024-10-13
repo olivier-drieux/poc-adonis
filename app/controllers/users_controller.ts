@@ -1,3 +1,4 @@
+import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UsersController {
@@ -5,11 +6,15 @@ export default class UsersController {
    * Display a list of resource
    */
   async index({ inertia, request }: HttpContext) {
-    if ('infinite-scroll' in request.qs()) {
-      return inertia.render('users/infinite-scroll')
+    const props = {
+      users: () => User.all(),
     }
 
-    return inertia.render('users/table')
+    if ('infinite-scroll' in request.qs()) {
+      return inertia.render('users/infinite-scroll', props)
+    }
+
+    return inertia.render('users/table', props)
   }
 
   /**
@@ -20,7 +25,16 @@ export default class UsersController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request, response }: HttpContext) {
+    const user = new User()
+    user.fullName = request.input('fullName')
+    user.email = request.input('email')
+    user.password = request.input('password')
+
+    await user.save()
+
+    response.redirect().withQs({ 'infinite-scroll': true }).toRoute('users.index')
+  }
 
   /**
    * Show individual record
