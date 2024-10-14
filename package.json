@@ -63,7 +63,7 @@
     "@adonisjs/shield": "^8.1.1",
     "@adonisjs/static": "^1.1.1",
     "@adonisjs/vite": "^3.0.0",
-    "@inertiajs/react": "^1.2.0",
+    "@inertiajs/react": "^2.0.0-beta.1",
     "@vinejs/vine": "^2.1.0",
     "edge.js": "^6.2.0",
     "luxon": "^3.5.0",
