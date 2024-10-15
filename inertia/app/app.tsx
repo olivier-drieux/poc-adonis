@@ -2,10 +2,10 @@
 /// <reference path="../../config/inertia.ts" />
 /// <reference path="../../config/auth.ts" />
 
-import '../css/app.css';
-import { hydrateRoot } from 'react-dom/client'
+import { resolvePageComponent } from '@adonisjs/inertia/helpers';
 import { createInertiaApp } from '@inertiajs/react';
-import { resolvePageComponent } from '@adonisjs/inertia/helpers'
+import { hydrateRoot } from 'react-dom/client';
+import '../css/app.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 

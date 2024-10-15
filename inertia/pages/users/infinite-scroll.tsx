@@ -1,6 +1,6 @@
-import UsersController from '#controllers/users_controller'
-import { InferPageProps } from '@adonisjs/inertia/types'
-import { Head, usePoll } from '@inertiajs/react'
+import UsersController from '#controllers/users_controller';
+import { InferPageProps } from '@adonisjs/inertia/types';
+import { Head, usePoll } from '@inertiajs/react';
 
 export default function UsersInfiniteScroll(props: InferPageProps<UsersController, 'index'>) {
     usePoll(2000);
