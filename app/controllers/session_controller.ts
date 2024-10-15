@@ -6,7 +6,7 @@ export default class SessionController {
     const { email, password } = request.only(['email', 'password'])
     const user = await User.verifyCredentials(email, password)
     await auth.use('web').login(user)
-    return response.redirect('/')
+    return response.redirect('/authenticated')
   }
 
   async logout({ auth, response }: HttpContext) {

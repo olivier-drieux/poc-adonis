@@ -27,7 +27,5 @@ export default class UsersController {
     user.password = request.input('password')
 
     await user.save()
-
-    response.redirect().withQs({ 'infinite-scroll': true }).toRoute('users.index')
   }
 }

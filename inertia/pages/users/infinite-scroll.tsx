@@ -8,7 +8,7 @@ export default function UsersInfiniteScroll(props: InferPageProps<UsersControlle
         <>
             <Head title="Users table" />
             <h1>Users Infinite Scroll</h1>
-            <pre>{JSON.stringify(props)}</pre>
+            <pre>{JSON.stringify(props, null, 4)}</pre>
         </>
     )
 }
