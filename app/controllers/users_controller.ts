@@ -20,7 +20,7 @@ export default class UsersController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request, response }: HttpContext) {
+  async store({ request }: HttpContext) {
     const user = new User()
     user.fullName = request.input('fullName')
     user.email = request.input('email')
