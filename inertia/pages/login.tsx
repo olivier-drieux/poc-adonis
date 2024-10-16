@@ -9,7 +9,7 @@ export default function Login() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault()
-    post('/auth/login')
+    post('/api/login')
   }
 
   return (

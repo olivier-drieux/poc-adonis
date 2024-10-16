@@ -8,14 +8,23 @@
 */
 
 const UsersController = () => import('#controllers/users_controller')
-const SessionController = () => import('#controllers/session_controller')
+const AuthController = () => import('#controllers/auth_controller')
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
-router.resource('/users', UsersController).only(['index', 'store'])
 router.on('/').renderInertia('home')
-router.on('/authenticated').renderInertia('authenticated').use(middleware.auth())
-router.on('/login').renderInertia('login')
 
-router.post('/auth/login', [SessionController, 'login'])
-router.post('/auth/logout', [SessionController, 'logout']).use(middleware.auth())
+// User routes
+router.resource('/users', UsersController)
+
+// Auth routes
+router.get('/login', [AuthController, 'login'])
+router.get('/authenticated', [AuthController, 'authenticated']).use(middleware.auth())
+
+// API routes
+router
+  .group(() => {
+    router.post('/login', [AuthController, 'apiLogin'])
+    router.post('/logout', [AuthController, 'apiLogout']).use(middleware.auth())
+  })
+  .prefix('/api')

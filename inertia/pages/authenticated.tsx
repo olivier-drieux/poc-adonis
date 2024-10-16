@@ -7,7 +7,7 @@ export default function Authenticated(props: SharedProps) {
     return (
         <>
             <pre>{JSON.stringify(props, null, 4)}</pre>
-            <button onClick={() => post('/auth/logout')}>Logout</button>
+            <button onClick={() => post('/api/logout')}>Logout</button>
         </>
     )
 }
