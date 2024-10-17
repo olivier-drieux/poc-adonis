@@ -1,6 +1,6 @@
 import { createInertiaApp } from '@inertiajs/react'
-import { MantineProvider } from '@mantine/core'
 import ReactDOMServer from 'react-dom/server'
+import Layout from '~/components/layout'
 
 export default function render(page: any) {
   return createInertiaApp({
@@ -11,9 +11,9 @@ export default function render(page: any) {
       return pages[`../pages/${name}.tsx`]
     },
     setup: ({ App, props }) => (
-      <MantineProvider>
+      <Layout>
         <App {...props} />
-      </MantineProvider>
+      </Layout>
     ),
   })
 }

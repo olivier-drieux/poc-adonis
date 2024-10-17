@@ -1,31 +1,25 @@
 import User from '#models/user'
+import { createUserValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UsersController {
-  /**
-   * Display a list of resource
-   */
-  async index({ inertia, request }: HttpContext) {
-    const props = {
-      users: () => User.all(),
+    async table({ inertia }: HttpContext) {
+        return inertia.render('users/table', { users: () => User.all() })
     }
 
-    if ('infinite-scroll' in request.qs()) {
-      return inertia.render('users/infinite-scroll', props)
+    async infinite({ inertia }: HttpContext) {
+        return inertia.render('users/infinite-scroll', {
+            users: () => User.all(),
+        })
     }
 
-    return inertia.render('users/table', props)
-  }
+    async create({ inertia }: HttpContext) {
+        return inertia.render('users/create/create')
+    }
 
-  /**
-   * Handle form submission for the create action
-   */
-  async store({ request }: HttpContext) {
-    const user = new User()
-    user.fullName = request.input('fullName')
-    user.email = request.input('email')
-    user.password = request.input('password')
+    async store({ request, response }: HttpContext) {
+        User.create(await request.validateUsing(createUserValidator))
 
-    await user.save()
-  }
+        response.redirect().toRoute('users.index')
+    }
 }

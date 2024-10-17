@@ -5,27 +5,26 @@
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 import { createInertiaApp } from '@inertiajs/react'
 import { hydrateRoot } from 'react-dom/client'
+import Layout from '~/components/layout'
 import '../css/app.css'
-import '@mantine/core/styles.css'
-import { MantineProvider } from '@mantine/core'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
 createInertiaApp({
-    progress: { color: '#5468FF' },
+  progress: { color: '#5468FF' },
 
-    title: (title) => `${title} - ${appName}`,
+  title: (title) => `${title} - ${appName}`,
 
-    resolve: (name) => {
-        return resolvePageComponent(`../pages/${name}.tsx`, import.meta.glob('../pages/**/*.tsx'))
-    },
+  resolve: (name) => {
+    return resolvePageComponent(`../pages/${name}.tsx`, import.meta.glob('../pages/**/*.tsx'))
+  },
 
-    setup({ el, App, props }) {
-        hydrateRoot(
-            el,
-            <MantineProvider>
-                <App {...props} />
-            </MantineProvider>
-        )
-    },
+  setup({ el, App, props }) {
+    hydrateRoot(
+      el,
+      <Layout>
+        <App {...props} />
+      </Layout>
+    )
+  },
 })
