@@ -18,13 +18,13 @@ router.on('/').renderInertia('home')
 router.resource('/users', UsersController)
 
 // Auth routes
-router.get('/login', [AuthController, 'login'])
+router.get('/login', [AuthController, 'login']).use(middleware.guest())
 router.get('/authenticated', [AuthController, 'authenticated']).use(middleware.auth())
 
 // API routes
 router
   .group(() => {
-    router.post('/login', [AuthController, 'apiLogin'])
+    router.post('/login', [AuthController, 'apiLogin']).use(middleware.guest())
     router.post('/logout', [AuthController, 'apiLogout']).use(middleware.auth())
   })
   .prefix('/api')
