@@ -1,12 +1,19 @@
 import { Head, Link } from '@inertiajs/react'
+import { Button, Stack } from '@mantine/core'
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-4">
+    <Stack h="100dvh" align="center" justify="center">
       <Head title="Homepage" />
-      <Link href="/authenticated">Authentication</Link>
-      <Link href="/users">Users table</Link>
-      <Link href="/users?infinite-scroll">Users infinite scroll</Link>
-    </div>
+      <Button>
+        <Link href="/authenticated">Authentication</Link>
+      </Button>
+      <Button>
+        <Link href="/users">Users table</Link>
+      </Button>
+      <Button>
+        <Link href="/users?infinite-scroll">Users infinite scroll</Link>
+      </Button>
+    </Stack>
   )
 }
